@@ -4,17 +4,7 @@ package com.wordy.pally;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import java.util.List;
-
-
 public class PalindromeWordSearchTest {
-
-    @Test
-    public void testFindPalindromeAtIndex() {
-        PalindromeFinder palindromeFinder = new PalindromeFinder();
-        List<Palindrome> results  = palindromeFinder.find("fyddycent", 1);
-        assertNotNull(results);
-    }
 
     @Test
     public void testIsRepeatCharacterAtIndex1() {
@@ -87,6 +77,15 @@ public class PalindromeWordSearchTest {
         assertNull(thirdMatchingCharacters);
         assertNull(fourthMatchingCharacters);
 
+    }
+
+    @Test
+    public void testFindPalindromeAtIndex() {
+        PalindromeFinder palindromeFinder = new PalindromeFinder();
+        Palindrome palindrome = palindromeFinder.findPalindromeAtIndex("fyddycent".toCharArray(), 3);
+        assertEquals("yddy", palindrome.text());
+        assertEquals(1, palindrome.index().intValue());
+        assertEquals(4, palindrome.length().intValue());
     }
 
 }

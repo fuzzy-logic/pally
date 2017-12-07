@@ -59,4 +59,33 @@ public class PalindromeFinder {
         return pair;
 
     }
+
+
+
+    /**
+     * Search outwards for palindrome text from given duplicate character index
+     *
+     * @param characters character array to search
+     * @param fromIndex index of repeating character
+     * @return string of palindrome found at given index
+     */
+    Palindrome findPalindromeAtIndex(char[] characters, int fromIndex) {
+        int previousCharIndex = fromIndex -1;
+        boolean findMatching = true;
+        int iteration = 1;
+        char[] firstPair = getNextMatchingCharPair(characters, fromIndex, 0);
+        StringBuilder currentPalindrome = new StringBuilder().append(firstPair);
+        while(findMatching) {
+            char[] nextPair = getNextMatchingCharPair(characters, fromIndex, iteration);
+            if (nextPair != null) {
+                currentPalindrome.append(nextPair[1]);
+                currentPalindrome = new StringBuilder().append(nextPair[0]).append(currentPalindrome);
+                iteration++;
+            } else {
+                findMatching = false;
+            }
+        }
+        Palindrome palindrome = new Palindrome(currentPalindrome.toString(), (previousCharIndex - iteration) + 1, iteration * 2);
+        return palindrome;
+    }
 }
