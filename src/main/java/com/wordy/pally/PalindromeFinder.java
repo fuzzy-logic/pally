@@ -25,7 +25,7 @@ public class PalindromeFinder {
         List<Palindrome> palindromes = new ArrayList<Palindrome>();
         char[] characters = inputString.toCharArray();
 
-        for (int count = 2 ; count < characters.length ; count++) {
+        for (int count = 0 ; count < characters.length ; count++) {
             if (isRepeatCharacterAtIndex(characters, count)) {
                 Palindrome palindrome = findPalindromeFromIndex(characters, count);
                 palindromes.add(palindrome);
@@ -41,11 +41,11 @@ public class PalindromeFinder {
 
 
     /**
-     * Use while parsing string or character arrays to flag duplicate character in a given string
+     * Use while parsing string or character arrays to flag duplicate character at given index
      *
-     * @param characters given string to find repeating letters
+     * @param characters given string to check
      * @param atIndex index of second repeating character
-     * @return true if given index is repeating character
+     * @return true if letter at index matches previous letter
      */
     public boolean isRepeatCharacterAtIndex(char[] characters, int atIndex) {
         if (atIndex < 1 || atIndex > characters.length -1) return false;
@@ -93,22 +93,34 @@ public class PalindromeFinder {
      */
     Palindrome findPalindromeFromIndex(char[] characters, int fromIndex) {
         int previousCharIndex = fromIndex -1;
-        boolean findMatching = true;
+        boolean searching = true;
         int iteration = 1;
         char[] firstPair = getNextMatchingCharPair(characters, fromIndex, 0);
         StringBuilder currentPalindrome = new StringBuilder().append(firstPair);
-        while(findMatching) {
+        while(searching) {
             char[] nextPair = getNextMatchingCharPair(characters, fromIndex, iteration);
             if (nextPair != null) {
                 currentPalindrome.append(nextPair[1]);
                 currentPalindrome = new StringBuilder().append(nextPair[0]).append(currentPalindrome);
                 iteration++;
             } else {
-                findMatching = false;
+                searching = false;
             }
         }
         Palindrome palindrome = new Palindrome(currentPalindrome.toString(), (previousCharIndex - iteration) + 1, iteration * 2);
         return palindrome;
+    }
+
+
+
+    /**
+     * main method with hard coded variables to run coding challenge for demo
+     * @param args
+     */
+    public static void main(String[] args) {
+        PalindromeFinder palindromeFinder = new PalindromeFinder();
+        List<Palindrome> palindromes = palindromeFinder.find("sqrrqabccbatudefggfedvwhijkllkjihxymnnmzpop", 3);
+        palindromes.stream().forEach(System.out::println);
     }
 
 }

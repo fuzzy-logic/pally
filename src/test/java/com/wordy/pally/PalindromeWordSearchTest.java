@@ -91,6 +91,25 @@ public class PalindromeWordSearchTest {
     }
 
     @Test
+    public void testFindPalindromeIn2LetterStringAtIndex1() {
+        PalindromeFinder palindromeFinder = new PalindromeFinder();
+        List<Palindrome> palindromes = palindromeFinder.find("bb", 1);
+        assertEquals("bb", palindromes.get(0).text());
+        assertEquals(0, palindromes.get(0).index().intValue());
+        assertEquals(2, palindromes.get(0).length().intValue());
+    }
+
+    @Test
+    public void testFindPalindromesIn4LetterStringAtIndex0() {
+        PalindromeFinder palindromeFinder = new PalindromeFinder();
+        List<Palindrome> palindromes = palindromeFinder.find("abba", 2);
+
+        assertEquals("abba", palindromes.get(0).text());
+        assertEquals(0, palindromes.get(0).index().intValue());
+        assertEquals(4, palindromes.get(0).length().intValue());
+    }
+
+    @Test
     public void testFindsOverlappingPalindromes() {
         PalindromeFinder palindromeFinder = new PalindromeFinder();   //012345678
         List<Palindrome> results = palindromeFinder.find("aabbaaaabb", 2);
