@@ -4,6 +4,8 @@ package com.wordy.pally;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import java.util.List;
+
 public class PalindromeWordSearchTest {
 
     @Test
@@ -82,10 +84,50 @@ public class PalindromeWordSearchTest {
     @Test
     public void testFindPalindromeAtIndex() {
         PalindromeFinder palindromeFinder = new PalindromeFinder();
-        Palindrome palindrome = palindromeFinder.findPalindromeAtIndex("fyddycent".toCharArray(), 3);
+        Palindrome palindrome = palindromeFinder.findPalindromeFromIndex("fyddycent".toCharArray(), 3);
         assertEquals("yddy", palindrome.text());
         assertEquals(1, palindrome.index().intValue());
         assertEquals(4, palindrome.length().intValue());
+    }
+
+    @Test
+    public void testFindsOverlappingPalindromes() {
+        PalindromeFinder palindromeFinder = new PalindromeFinder();   //012345678
+        List<Palindrome> results = palindromeFinder.find("aabbaaaabb", 2);
+
+        assertEquals(2, results.size());
+
+        assertEquals("bbaaaabb", results.get(0).text());
+        assertEquals(2, results.get(0).index().intValue());
+        assertEquals(8, results.get(0).length().intValue());
+
+        assertEquals("aabbaa", results.get(1).text());
+        assertEquals(0, results.get(1).index().intValue());
+        assertEquals(6, results.get(1).length().intValue());
+    }
+
+    /**
+     * Test proving "coding challenge" input string case
+     */
+    @Test
+    public void testDoesFindCodingChallengePlaindromes() {
+        String inputString = "sqrrqabccbatudefggfedvwhijkllkjihxymnnmzpop";
+        PalindromeFinder palindrome = new PalindromeFinder();
+        List<Palindrome> results = palindrome.find(inputString, 3);
+
+        assertEquals(3, results.size());
+
+        assertEquals("hijkllkjih", results.get(0).text());
+        assertEquals(23, results.get(0).index().intValue());
+        assertEquals(10, results.get(0).length().intValue());
+
+        assertEquals("defggfed", results.get(1).text());
+        assertEquals(13, results.get(1).index().intValue());
+        assertEquals(8, results.get(1).length().intValue());
+
+        assertEquals("abccba", results.get(2).text());
+        assertEquals(5, results.get(2).index().intValue());
+        assertEquals(6, results.get(2).length().intValue());
     }
 
 }
