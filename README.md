@@ -25,6 +25,7 @@ To run the program and get it's output for the code challenge run the following 
 ```
 git clone https://github.com/fuzzy-logic/pally.git
 cd pally
+mvn compile
 mvn -q exec:java
 ```
 
