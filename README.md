@@ -23,6 +23,8 @@ Install java 1.8 from: http://www.oracle.com/technetwork/java/javase/downloads/j
 To run the program and get it's output for the code challenge run the following command from your shell in the project root directory:
 
 ```
+git clone https://github.com/fuzzy-logic/pally.git
+cd pally
 mvn exec:java
 ```
 
