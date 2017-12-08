@@ -8,6 +8,15 @@ import java.util.List;
 
 public class PalindromeWordSearchTest {
 
+
+    @Test
+    public void testFindWithEmptyString() {
+        String inputString = "";
+        PalindromeFinder palindromeFinder = new PalindromeFinder();
+        List<Palindrome> results = palindromeFinder.find("", 1);
+        assertEquals(results.size(), 0);
+    }
+
     @Test
     public void testIsRepeatCharacterAtIndex1() {
         String inputString = "abbawabba";
@@ -53,6 +62,19 @@ public class PalindromeWordSearchTest {
     }
 
     @Test
+    public void testGetNextMatchingCharPairWithOneLetterString() {
+        String inputString = "g";
+        PalindromeFinder palindromeFinder = new PalindromeFinder();
+
+        char[] firstMatchingCharacters = palindromeFinder.getNextMatchingCharPair(inputString.toCharArray(), 1, 0);
+        char[] secondMatchingCharacters = palindromeFinder.getNextMatchingCharPair(inputString.toCharArray(), 1, 1);
+
+        assertNull(firstMatchingCharacters);
+        assertNull(secondMatchingCharacters);
+
+    }
+
+    @Test
     public void testGetNextMatchingCharPairWithNonPalindrome() {
         String inputString = "ga";
         PalindromeFinder palindromeFinder = new PalindromeFinder();
@@ -79,6 +101,20 @@ public class PalindromeWordSearchTest {
         assertNull(thirdMatchingCharacters);
         assertNull(fourthMatchingCharacters);
 
+    }
+
+    @Test
+    public void testFindPalindromeAtIndexWithEmptyString() {
+        PalindromeFinder palindromeFinder = new PalindromeFinder();
+        Palindrome palindrome = palindromeFinder.findPalindromeFromIndex("".toCharArray(), 3);
+        assertNull(palindrome);
+    }
+
+    @Test
+    public void testFindPalindromeAtIndexWithOneLetterString() {
+        PalindromeFinder palindromeFinder = new PalindromeFinder();
+        Palindrome palindrome = palindromeFinder.findPalindromeFromIndex("a".toCharArray(), 6);
+        assertNull(palindrome);
     }
 
     @Test

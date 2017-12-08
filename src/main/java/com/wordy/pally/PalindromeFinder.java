@@ -96,6 +96,7 @@ public class PalindromeFinder {
         boolean searching = true;
         int iteration = 1;
         char[] firstPair = getNextMatchingCharPair(characters, fromIndex, 0);
+        if (firstPair == null || firstPair.length < 2) return null;
         StringBuilder currentPalindrome = new StringBuilder().append(firstPair);
         while(searching) {
             char[] nextPair = getNextMatchingCharPair(characters, fromIndex, iteration);
