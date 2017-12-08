@@ -25,7 +25,7 @@ To run the program and get it's output for the code challenge run the following 
 ```
 git clone https://github.com/fuzzy-logic/pally.git
 cd pally
-mvn exec:java
+mvn -q exec:java
 ```
 
 or run main method of class com.wordsmith.pally.PalindromeFinder
